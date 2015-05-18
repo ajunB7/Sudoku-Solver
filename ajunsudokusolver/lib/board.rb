@@ -1,4 +1,3 @@
-require 'terminal-table'
 
 module Sudoku
 	class Board
@@ -49,14 +48,5 @@ module Sudoku
 			end
 		end
 
-		def to_s
-			output = Terminal::Table.new do |t|
-				(0...BOXSIZE).each do |row|
-					t << @values[row]
-					t << :separator unless (row+1) == BOXSIZE
-				end
-			end
-			puts output
-		end
 	end
 end

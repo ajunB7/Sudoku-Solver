@@ -1,0 +1,18 @@
+
+<section class="sudoku">
+        <div class="sudoku-row">
+        <% (0...9).each do |i| %>
+          	<div class="sudoku-row">
+          		<% (0...9).each do |j| %>
+            		<div class="cell"><a class="cell-value filled"><span><%= @board[i][j] %></span></a></div>
+          		<% end %>
+         	 </div>   
+        <% end %>
+
+
+
+        </div>      
+        <div style="clear:both;"></div>
+    </section>
+
+    

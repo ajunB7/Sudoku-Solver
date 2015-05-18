@@ -1,0 +1,30 @@
+<div class="intro text-center">
+  <h1>Welcome</h1>
+  <h4>Click on a cell and press a number(1-9) to enter your value</h4>
+</div>
+
+<section class="sudoku">
+ <%= render 'example' %>
+	<%= form_tag sudoku_index_path do %>
+        <div class="sudoku-row">
+        <% (0...9).each do |i| %>
+          	<div class="sudoku-row">
+          		<% (0...9).each do |j| %>
+            		<div class="cell"><a class="cell-value"><span></span><%= hidden_field_tag("form[#{i}-#{j}]",  nil) %></a></div>
+          		<% end %>
+         	 </div>   
+        <% end %>
+
+
+
+        </div>
+        <div style="clear:both;"></div>
+        <%= submit_tag("Solve", class: "btn btn-success")%>
+
+        <%= button_tag(type: 'button', class: "clear-all btn btn-primary") do
+             content_tag(:strong, 'Clear' )
+        end%>
+      <% end %>
+    </section>
+
+
