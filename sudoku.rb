@@ -1,17 +1,29 @@
 require 'pry'
 require_relative 'board.rb'
+require 'descriptive-statistics'
+require "benchmark"
+
 
 module Sudoku
 
 	class Puzzle
 		attr_accessor :board
+		attr_reader :benchmark, :nodes
+
 
 		def initialize
 			@board = Sudoku::Board.new()
 		end
 
 		def solve
-			recursive_backtrack_search
+			# Reset Timers
+			@benchmark = 0
+			@nodes = 0
+
+			# Execute with benchmark
+			@benchmark = Benchmark.measure do
+				recursive_backtrack_search
+			end
 		end
 
 		private
@@ -21,6 +33,7 @@ module Sudoku
 
 			(1..Sudoku::Board::BOXSIZE).each do |n|
 				if constraints_check(row, column, n)
+					@nodes += 1
 					@board.values[row][column] = n
 
 					# Means first line returns true and we are finished
@@ -71,7 +84,6 @@ end
 
 
 
-puzzle = Sudoku::Puzzle.new()
 # puts "Enter the row, column, value with values (1-#{Sudoku::Board::BOXSIZE}) for each starting number (Seperated by space)"
 #  while true
 #  	inp = gets.chomp
@@ -81,57 +93,33 @@ puzzle = Sudoku::Puzzle.new()
 #  	puts "Enter more values or Press q to begin"
 #  end
 def easy(puzzle)
-	puzzle.board.values[0][0] = 3
-	puzzle.board.values[0][2] = 9
-	puzzle.board.values[0][7] = 4
-	puzzle.board.values[0][8] = 2
-
-	puzzle.board.values[1][1] = 1
-	puzzle.board.values[1][2] = 8
-	puzzle.board.values[1][3] = 9
-	puzzle.board.values[1][4] = 4
-	puzzle.board.values[1][5] = 3
-	puzzle.board.values[1][6] = 6
-
-	puzzle.board.values[2][6] = 8
-	puzzle.board.values[2][7] = 9
-
-	puzzle.board.values[3][2] = 3
-	puzzle.board.values[3][4] = 9
-	puzzle.board.values[3][7] = 6
-
-	puzzle.board.values[4][0] = 4
-	puzzle.board.values[4][1] = 2
-	puzzle.board.values[4][2] = 7
-	puzzle.board.values[4][6] = 5
-	puzzle.board.values[4][7] = 8
-	puzzle.board.values[4][8] = 9
-
-	puzzle.board.values[5][1] = 6
-	puzzle.board.values[5][4] = 8
-	puzzle.board.values[5][6] = 2
-
-	puzzle.board.values[6][1] = 7
-	puzzle.board.values[6][2] = 2
-
-	puzzle.board.values[7][2] = 4
-	puzzle.board.values[7][3] = 5
-	puzzle.board.values[7][4] = 7
-	puzzle.board.values[7][5] = 6
-	puzzle.board.values[7][6] = 3
-	puzzle.board.values[7][7] = 2
-
-	puzzle.board.values[8][0] = 6
-	puzzle.board.values[8][1] = 3
-	puzzle.board.values[8][6] = 7
-	puzzle.board.values[8][8] = 4
-
+	puzzle.board.values = [[3, nil, 9, nil, nil, nil, nil, 4, 2],
+				 [nil, 1, 8, 9, 4, 3, 6, nil, nil],
+				 [nil, nil, nil, nil, nil, nil, 8, 9, nil],
+				 [nil, nil, 3, nil, 9, nil, nil, 6, nil],
+				 [4, 2, 7, nil, nil, nil, 5, 8, 9],
+				 [nil, 6, nil, nil, 8, nil, 2, nil, nil],
+				 [nil, 7, 2, nil, nil, nil, nil, nil, nil],
+				 [nil, nil, 4, 5, 7, 6, 3, 2, nil],
+				 [6, 3, nil, nil, nil, nil, 7, nil, 4]]
+end
+num_run = 50
+total_benchmark = []
+total_nodes = []
+num_run.times do |n|
+	puzzle = Sudoku::Puzzle.new()
+	# Change puzzle difficulty
+	easy(puzzle)
+	puzzle.solve
+	puzzle.board.to_s if n.zero?
+	total_benchmark << puzzle.benchmark.real
+	total_nodes << puzzle.nodes
+	STDOUT.write "\r[#{n+1}/#{num_run}]"
 end
 
-puts "Here is your starting Board"
-easy(puzzle)
-# puzzle.board.to_s
-puzzle.solve
-puzzle.board.to_s 
-# binding.pry
+puts "\nIt took #{total_benchmark.inject(:+)} seconds to solve #{num_run} times"
+stats_time = DescriptiveStatistics::Stats.new(total_benchmark)
+stats_nodes = DescriptiveStatistics::Stats.new(total_nodes)
+puts "AvgTime: #{stats_time.mean} +/- #{stats_time.standard_deviation}"
+puts "AvgNodes: #{stats_nodes.mean} +/- #{stats_nodes.standard_deviation}"
 
