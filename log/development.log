@@ -13853,3 +13853,63 @@ Processing by SudokuController#index as HTML
   Rendered layouts/_navigation.html.erb (3.0ms)
   Rendered layouts/_messages.html.erb (0.1ms)
 Completed 200 OK in 120ms (Views: 119.3ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for ::1 at 2015-05-17 20:15:42 -0400
+Processing by SudokuController#index as HTML
+  Rendered sudoku/_example.html.erb (1.2ms)
+  Rendered sudoku/index.html.erb within layouts/application (13.1ms)
+  Rendered layouts/_navigation_links.html.erb (0.5ms)
+  Rendered layouts/_navigation.html.erb (3.2ms)
+  Rendered layouts/_messages.html.erb (0.4ms)
+Completed 200 OK in 748ms (Views: 738.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/pages/about" for ::1 at 2015-05-17 20:15:47 -0400
+Processing by HighVoltage::PagesController#show as HTML
+  Parameters: {"id"=>"about"}
+  Rendered pages/about.html.erb within layouts/application (0.6ms)
+  Rendered layouts/_navigation_links.html.erb (0.3ms)
+  Rendered layouts/_navigation.html.erb (3.2ms)
+  Rendered layouts/_messages.html.erb (0.4ms)
+Completed 200 OK in 100ms (Views: 99.3ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for ::1 at 2015-05-17 20:15:50 -0400
+Processing by SudokuController#index as HTML
+  Rendered sudoku/_example.html.erb (0.5ms)
+  Rendered sudoku/index.html.erb within layouts/application (6.0ms)
+  Rendered layouts/_navigation_links.html.erb (0.1ms)
+  Rendered layouts/_navigation.html.erb (2.7ms)
+  Rendered layouts/_messages.html.erb (0.1ms)
+Completed 200 OK in 101ms (Views: 100.6ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/easy" for ::1 at 2015-05-17 20:15:54 -0400
+Processing by SudokuController#easy as HTML
+  Rendered sudoku/_example.html.erb (0.3ms)
+  Rendered sudoku/easy.html.erb within layouts/application (6.0ms)
+  Rendered layouts/_navigation_links.html.erb (0.1ms)
+  Rendered layouts/_navigation.html.erb (2.7ms)
+  Rendered layouts/_messages.html.erb (0.1ms)
+Completed 200 OK in 94ms (Views: 93.6ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/sudoku" for ::1 at 2015-05-17 20:16:06 -0400
+Processing by SudokuController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"NUl4Zus+VDb/5ihDcUVumwKI7UGcH31uOFyiqa4aGBQtoO+3yCUxv9fDumm9jJawC5kaStU5+rhmkEAAnyZohg==", "form"=>{"0-0"=>"3", "0-1"=>"", "0-2"=>"9", "0-3"=>"", "0-4"=>"", "0-5"=>"", "0-6"=>"", "0-7"=>"4", "0-8"=>"2", "1-0"=>"", "1-1"=>"1", "1-2"=>"8", "1-3"=>"9", "1-4"=>"4", "1-5"=>"3", "1-6"=>"6", "1-7"=>"", "1-8"=>"", "2-0"=>"", "2-1"=>"", "2-2"=>"", "2-3"=>"", "2-4"=>"", "2-5"=>"", "2-6"=>"8", "2-7"=>"9", "2-8"=>"", "3-0"=>"", "3-1"=>"", "3-2"=>"3", "3-3"=>"", "3-4"=>"9", "3-5"=>"", "3-6"=>"", "3-7"=>"6", "3-8"=>"", "4-0"=>"4", "4-1"=>"2", "4-2"=>"7", "4-3"=>"", "4-4"=>"", "4-5"=>"", "4-6"=>"5", "4-7"=>"8", "4-8"=>"9", "5-0"=>"", "5-1"=>"6", "5-2"=>"", "5-3"=>"", "5-4"=>"8", "5-5"=>"", "5-6"=>"2", "5-7"=>"", "5-8"=>"", "6-0"=>"", "6-1"=>"7", "6-2"=>"2", "6-3"=>"", "6-4"=>"", "6-5"=>"", "6-6"=>"", "6-7"=>"", "6-8"=>"", "7-0"=>"", "7-1"=>"", "7-2"=>"4", "7-3"=>"5", "7-4"=>"7", "7-5"=>"6", "7-6"=>"3", "7-7"=>"2", "7-8"=>"", "8-0"=>"6", "8-1"=>"3", "8-2"=>"", "8-3"=>"", "8-4"=>"", "8-5"=>"", "8-6"=>"7", "8-7"=>"", "8-8"=>"4"}, "commit"=>"Solve"}
+  Rendered sudoku/create.html.erb within layouts/application (0.7ms)
+  Rendered layouts/_navigation_links.html.erb (0.2ms)
+  Rendered layouts/_navigation.html.erb (2.2ms)
+  Rendered layouts/_messages.html.erb (0.1ms)
+Completed 200 OK in 132ms (Views: 101.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for ::1 at 2015-05-17 20:16:09 -0400
+Processing by SudokuController#index as HTML
+  Rendered sudoku/_example.html.erb (0.3ms)
+  Rendered sudoku/index.html.erb within layouts/application (5.2ms)
+  Rendered layouts/_navigation_links.html.erb (0.1ms)
+  Rendered layouts/_navigation.html.erb (2.8ms)
+  Rendered layouts/_messages.html.erb (0.1ms)
+Completed 200 OK in 101ms (Views: 100.5ms | ActiveRecord: 0.0ms)
