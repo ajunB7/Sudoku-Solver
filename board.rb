@@ -3,18 +3,17 @@ require 'terminal-table'
 module Sudoku
 	class Board
 
-		BOXSIZE = 9
+		BOARDSIZE = 9
 		SQUARESIZE = 3
 		attr_accessor :values
 
 		def initialize
-			@values = Array.new(BOXSIZE){Array.new(BOXSIZE)}
+			@values = Array.new(BOARDSIZE){Array.new(BOARDSIZE)}
 		end
 
 		# Get the box given any cells location
 		def box(row,column)
-			box_start_row = (row/SQUARESIZE).floor * SQUARESIZE
-			box_start_column = (column/SQUARESIZE).floor * SQUARESIZE
+			box_start_row, box_start_column = box_location(row,column)
 
 			box = Array.new(SQUARESIZE){Array.new(SQUARESIZE)}
 
@@ -25,6 +24,13 @@ module Sudoku
 			end
 
 			return box
+		end
+
+		def box_location(row,column)
+			box_start_row = (row/SQUARESIZE).floor * SQUARESIZE
+			box_start_column = (column/SQUARESIZE).floor * SQUARESIZE
+
+			return box_start_row, box_start_column
 		end
 
 		def rows(column)
@@ -42,8 +48,8 @@ module Sudoku
 		end
 
 		def nil_cell
-			(0...BOXSIZE).each do |i|
-				(0...BOXSIZE).each do |j|
+			(0...BOARDSIZE).each do |i|
+				(0...BOARDSIZE).each do |j|
 					return i,j if @values[i][j].nil?
 				end
 			end
@@ -51,9 +57,9 @@ module Sudoku
 
 		def to_s
 			output = Terminal::Table.new do |t|
-				(0...BOXSIZE).each do |row|
+				(0...BOARDSIZE).each do |row|
 					t << @values[row]
-					t << :separator unless (row+1) == BOXSIZE
+					t << :separator unless (row+1) == BOARDSIZE
 				end
 			end
 			puts output
