@@ -72,6 +72,30 @@ module Sudoku
 						 [nil, 3, nil, nil, 4, 8, nil, nil, nil]]
 		end
 
+		def hard
+			@board.values = [[6, nil, nil, 8, nil, 9, nil, nil, nil],
+					 [nil, nil, 5, nil, nil, 7, nil, 8, 6],
+					 [nil, 7, nil, nil, nil, nil, nil, nil, nil],
+					 [nil, nil, nil, 4, nil, 1, 3, nil, 7],
+					 [8, nil, 1, nil, nil, nil, 5, nil, 4],
+					 [7, nil, 9, 2, nil, 5, nil, nil, nil],
+					 [nil, nil, nil, nil, nil, nil, nil, 4, nil],
+					 [1, 8, nil, 5, nil, nil, 6, nil, nil],
+					 [nil, nil, nil, 3, nil, 4, nil, nil, 5]]
+		end
+
+		def evil
+			@board.values = [[1, nil, nil, nil, nil, nil, nil, nil, nil],
+					 [7, nil, nil, nil, nil, 8, 1, nil, 2],
+					 [nil, 6, 3, nil, 5, nil, nil, nil, nil],
+					 [nil, 7, nil, 3, 9, nil, nil, nil, nil],
+					 [nil, nil, 5, 8, nil, 4, 6, nil, nil],
+					 [nil, nil, nil, nil, 2, 5, nil, 4, nil],
+					 [nil, nil, nil, nil, 1, nil, 8, 7, nil],
+					 [2, nil, 8, 9, nil, nil, nil, nil, 3],
+					 [nil, nil, nil, nil, nil, nil, nil, nil, 6]]
+		end
+
 	end
 end
 

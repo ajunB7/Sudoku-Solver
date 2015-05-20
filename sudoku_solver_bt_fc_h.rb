@@ -26,28 +26,26 @@ module Sudoku
 			return true unless @board.contains_nil?
 			row, column = most_constrained_var
 
-			@possible.poss[row][column].each do |n|
+
+			least_constraining_value(row,column).each do |n|
 				if constraints_check(row, column, n)
 					@board.values[row][column] = n
-					set_and_forward_check = @possible.set_and_forward_check(row,column)
 
-					try_row, try_column = most_constrained_var
-					if try_row.nil? and try_column.nil?
-						return true
-					end
-
-					if set_and_forward_check
+					if @possible.set_and_forward_check(row,column)
 						@nodes += 1
 
 						# Means first line returns true and we are finished
 						return true if recursive_backtrack_search()
 
-						# Things done messed up and now we gotta backtrack
+						# Reset All
 						@board.values[row][column] = nil
-						@possible.poss[row][column] = @possible.possibilities(row, column)
+						# More like just set
+						@possible.set_and_forward_check(row,column)
 					end
 				end
 			end
+
+			# Everything is wrong fix it!
 			return false
 		end
 
@@ -98,17 +96,17 @@ module Sudoku
 
 		end
 
-		# how many other in constraints have the same possibility 
+		# how many other in constraints have the same possibility
 		def least_constraining_value(row,column)
 			box_start_row, box_start_column = @board.box_location(row,column)
-			res = {}
+			res = Hash.new
 			res = count_constraing_least_in_box(row,column,box_start_row,box_start_column, res)
 
 
-			res = count_constraing_least_in_row(column, box_start_row, box_start_column, res)
+			res = count_constraing_least_in_row(row, column, box_start_row, box_start_column, res)
 			res = count_constraing_least_in_column(row,column, box_start_row, box_start_column, res)
-			binding.pry
 			
+			return res.keys.sort {|a, b| res[a] <=> res[b]}
 		end
 
 		# Count nil in box
@@ -145,6 +143,7 @@ module Sudoku
 				(box_start_column...(box_start_column + Sudoku::Board::SQUARESIZE)).to_a.each do |j|
 					next if @possible.poss[i][j].nil?
 					@possible.poss[i][j].each do |p|
+						next unless @possible.poss[row][column].include?(p)
 						res[p] ||= 0
 						res[p] += 1
 					end
@@ -155,10 +154,11 @@ module Sudoku
 			return res
 		end
 
-		def count_constraing_least_in_row(column,box_start_row,box_start_column,res)
+		def count_constraing_least_in_row(row, column,box_start_row,box_start_column,res)
 			((0...Sudoku::Board::BOARDSIZE).to_a - (box_start_row...(box_start_row + Sudoku::Board::SQUARESIZE)).to_a).each do |row_exclude|
 				next if @possible.poss[row_exclude][column].nil?
 					@possible.poss[row_exclude][column].each do |p|
+						next unless @possible.poss[row][column].include?(p)
 						res[p] ||= 0
 						res[p] += 1
 					end
@@ -171,6 +171,7 @@ module Sudoku
 				next if column_counted == column_exclude
 				next if @possible.poss[row][column_exclude].nil?
 				@possible.poss[row][column_exclude].each do |p|
+					next unless @possible.poss[row][column_counted].include?(p)
 					res[p] ||= 0
 					res[p] += 1
 				end

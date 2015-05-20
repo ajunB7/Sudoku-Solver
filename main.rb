@@ -8,12 +8,14 @@ num_run = 50
 total_benchmark = []
 total_nodes = []
 num_run.times do |n|
-	# puzzle = Sudoku::SudokuSolverBtFcH.new()
+	puzzle = Sudoku::SudokuSolverBtFcH.new()
 	# puzzle = Sudoku::SudokuSolverBtFc.new()
-	puzzle = Sudoku::SudokuSolverBt.new()
+	# puzzle = Sudoku::SudokuSolverBt.new()
 	# Change puzzle difficulty
 	puzzle.easy
 	# puzzle.medium
+	puzzle.board.to_s if n.zero?
+	puzzle.board.to_s if n.zero?
 	puzzle.solve
 	puzzle.board.to_s if n.zero?
 	total_benchmark << puzzle.benchmark.real
