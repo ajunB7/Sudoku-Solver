@@ -45,7 +45,6 @@ module Sudoku
 
 		def set_and_check_valid_set(row,column)
 			# if any of these are corrupt
-
 			if fail_set_box(row,column) or fail_set_row(row) or fail_set_column(column)
 				@board.values[row][column] = nil
 				return false
@@ -57,7 +56,7 @@ module Sudoku
 
 		def fail_set_box(row,column)
 			box_start_row, box_start_column = @board.box_location(row,column)
-			res = false
+			
 
 			(box_start_row...(box_start_row + Sudoku::Board::SQUARESIZE)).to_a.each do |i|
 				(box_start_column...(box_start_column + Sudoku::Board::SQUARESIZE)).to_a.each do |j|
@@ -65,39 +64,39 @@ module Sudoku
 					@poss[i][j] = possibilities(i,j) if @board.values[i][j].nil?
 					next if @poss[i][j].nil?
 					# Here we have a blank cell but there are no possible numbers that can go here
-					res = true if @poss[i][j].empty? and @board.values[i][j].nil?
+					return true if @poss[i][j].empty? and @board.values[i][j].nil?
 				end
 			end
 
-			return res
+			return false
 		end
 
 		def fail_set_row(row)
 			row_array = (0...Sudoku::Board::BOARDSIZE).to_a
-			res = false
+			
 
 			row_array.each do |column|
 				 @poss[row][column] = possibilities(row,column) if @board.values[row][column].nil?
 
 				next if @poss[row][column].nil?
-				res = true if @poss[row][column].empty? and @board.values[row][column].nil?
+				return true if @poss[row][column].empty? and @board.values[row][column].nil?
 			end
 
-			return res
+			return false
 		end
 
 		def fail_set_column(column)
 			column_array = (0...Sudoku::Board::BOARDSIZE).to_a
-			res = false
+			
 
 			column_array.each do |row|
 				 @poss[row][column] = possibilities(row,column) if @board.values[row][column].nil?
 
 				next if @poss[row][column].nil?
-				res = true if @poss[row][column].empty? and @board.values[row][column].nil?
+				return true if @poss[row][column].empty? and @board.values[row][column].nil?
 			end
 			
-			return res
+			return false
 		end
 
 

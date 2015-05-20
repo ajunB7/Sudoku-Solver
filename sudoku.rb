@@ -60,6 +60,18 @@ module Sudoku
 				 [6, 3, nil, nil, nil, nil, 7, nil, 4]]
 		end
 
+		def medium
+			@board.values = [[nil, nil, nil, 1, 2, nil, nil, 3, nil],
+						 [nil, nil, 3, nil, 8, nil, nil, 1, 6],
+						 [4, nil, nil, 5, 3, nil, nil, 9, nil],
+						 [nil, 1, nil, 8, nil, nil, 5, 2, nil],
+						 [nil, 4, nil, nil, nil, nil, nil, 6, nil],
+						 [nil, 6, 8, nil, nil, 2, nil, 7, nil],
+						 [nil, 8, nil, nil, 9, 3, nil, nil, 2],
+						 [6, 9, nil, nil, 5, nil, 3, nil, nil],
+						 [nil, 3, nil, nil, 4, 8, nil, nil, nil]]
+		end
+
 	end
 end
 
