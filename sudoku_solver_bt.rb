@@ -20,7 +20,7 @@ module Sudoku
 			return true unless @board.contains_nil?
 			row, column = @board.nil_cell
 
-			(1..Sudoku::Board::BOARDSIZE).each do |n|
+			(1..Sudoku::Board::BOARDSIZE).to_a.shuffle.each do |n|
 				if constraints_check(row, column, n)
 					@nodes += 1
 					@board.values[row][column] = n

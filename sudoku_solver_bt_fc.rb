@@ -28,7 +28,7 @@ module Sudoku
 			return true unless @board.contains_nil?
 			row, column = @board.nil_cell
 
-			@possible.poss[row][column].each do |n|
+			@possible.poss[row][column].shuffle.each do |n|
 				if constraints_check(row, column, n)
 					@board.values[row][column] = n
 					if @possible.set_and_forward_check(row,column)
