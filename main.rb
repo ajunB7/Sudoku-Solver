@@ -1,7 +1,7 @@
 require 'pry'
-require_relative 'sudoku_solver_bt.rb'
-require_relative 'sudoku_solver_bt_fc.rb'
-require_relative 'sudoku_solver_bt_fc_h.rb'
+require_relative 'sudoku_bt.rb'
+require_relative 'sudoku_bt_fc.rb'
+require_relative 'sudoku_bt_fc_h.rb'
 require 'descriptive-statistics'
 
 # TODO: Use OptionParse to provide the type of puzzle and difficulty
@@ -13,9 +13,9 @@ num_run.times do |n|
 	# ========================
 	# Choose the Type of solve
 	# ========================
-	puzzle = Sudoku::SudokuSolverBtFcH.new()
-	# puzzle = Sudoku::SudokuSolverBtFc.new()
-	# puzzle = Sudoku::SudokuSolverBt.new()
+	# puzzle = Sudoku::SudokuBtFcH.new()
+	# puzzle = Sudoku::SudokuBtFc.new()
+	puzzle = Sudoku::SudokuBt.new()
 	
 	# ========================
 	# Change puzzle difficulty

@@ -3,7 +3,7 @@ require "benchmark"
 
 module Sudoku
 
-	class SudokuSolverBt < Sudoku::Puzzle
+	class SudokuBt < Sudoku::Puzzle
 		def solve
 			# Reset Timers
 			@benchmark = 0

@@ -1,9 +1,9 @@
-require_relative 'sudoku_solver_bt_fc_h.rb'
+require_relative 'sudoku_bt_fc_h.rb'
 require "benchmark"
 
 module Sudoku
 
-	class SudokuSolverBtFcH < Sudoku::SudokuSolverBtFc
+	class SudokuBtFcH < Sudoku::SudokuBtFc
 		def initialize
 			super
 		end

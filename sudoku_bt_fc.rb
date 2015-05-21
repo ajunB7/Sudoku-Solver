@@ -4,7 +4,7 @@ require "benchmark"
 
 module Sudoku
 
-	class SudokuSolverBtFc < Sudoku::Puzzle
+	class SudokuBtFc < Sudoku::Puzzle
 		def initialize
 			super
 
